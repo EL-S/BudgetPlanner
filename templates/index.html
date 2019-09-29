@@ -1,0 +1,60 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<h1>Example Template</h1>
+		<p>Your cookies: {{ cookies }}</p>
+		<table border="1">
+			<tr>
+				<th>Key</th>
+				<th>Value</th>
+			</tr>
+		{% for key, value in cookies.items %}
+			<tr>
+				<td>{{ key }}</td>
+				<td>{{ value }}</td>
+			</tr>
+		{% endfor %}
+		</table>
+		<p>Your files: {{ files }}</p>
+		<table border="1">
+			<tr>
+				<th>Key</th>
+				<th>Value</th>
+			</tr>
+		{% for key, value in files.items %}
+			<tr>
+				<td>{{ key }}</td>
+				<td>{{ value }}</td>
+			</tr>
+		{% endfor %}
+		</table>
+		<p>Your form data: {{ variables }}</p>
+		<table border="1">
+			<tr>
+				<th>Key</th>
+				<th>Value</th>
+			</tr>
+		{% for key, value in variables.items %}
+			<tr>
+				<td>{{ key }}</td>
+				<td>{{ value }}</td>
+			</tr>
+		{% endfor %}
+		</table>
+		<p>Your request type: {{ request_type }}</p>
+		<p>Your headers: {{ headers }}</p>
+		<table border="1">
+			<tr>
+				<th>Key</th>
+				<th>Value</th>
+			</tr>
+		{% for key, value in headers.items %}
+			<tr>
+				<td>{{ key }}</td>
+				<td>{{ value }}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</body>
+</html>
