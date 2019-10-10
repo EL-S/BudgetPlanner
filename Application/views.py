@@ -13,3 +13,8 @@ def index(request):
 def some_path(request):
     # this is a comment, if you want a link to this file/function, add it to the urls.py file in the BudgetPlanner directory
     return render(request, 'template_name.html', {'the_variable_name': 'the variable value'})
+
+
+def login(request):
+    # this is a comment, if you want a link to this file/function, add it to the urls.py file in the BudgetPlanner directory
+    return render(request, 'login.html', {'login': 'usename'})
