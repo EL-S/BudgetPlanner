@@ -3,8 +3,8 @@ import hashlib
 from random import randint
 from base64 import b64encode
 from os import urandom
-from send_email import *
-from config import settings
+from Application.send_email import *
+from Application.config import settings
 
 admin_email = settings['email']
 admin_password = settings['email_password']
