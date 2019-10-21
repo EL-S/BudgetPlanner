@@ -1,0 +1,100 @@
+.btn-group button {
+	background-color: #DDDDDD; /* Green background */
+	border: 1px solid black; /* Green border */
+	color: black; /* White text */
+	padding: 10px 24px; /* Some padding */
+	cursor: pointer; /* Pointer/hand icon */
+	float: left; /* Float the buttons side by side */
+}
+
+btn-group {
+	float: left;
+	display: inline;
+}
+
+#active{
+	background-color: #FFFFFF;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #939393;
+}
+
+button {
+	margin: 0px;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 200%;
+}
+
+table tr:last-child {
+	background-color: #CCCCCC;
+}
+
+th {
+	background-color: #CCCCCC;
+}
+
+
+td, th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+td:last-child {
+  border :none;
+  background-color: #ffffff;
+}
+
+h1 {
+	display: block;	margin: auto; text-align: left; font-size: 4em;
+}
+
+.profile {
+	position: absolute;
+	right: 4px;
+	transform: translateY(-85%);
+}
+
+section {
+	float: left;
+	margin-right: 5em;
+}
+
+.spending form {
+	display: inline-block;
+	float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+    font-size:14pt;
+}
+
+.spending form input:last-child {
+	width: 145px;
+}
+
+section table {
+	transform: translateY(10%);
+}
+
+#saved {
+	align: center;
+	font-size: 24pt;
+	transform: translateY(250%);
+}
