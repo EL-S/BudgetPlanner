@@ -1,8 +1,97 @@
-<html>
-	<head>
-	</head>
-	<body>
-		<h1>Another Example Template</h1>
-		<p>A simple page with a single variable here: {{ the_variable_name }}</p>
-	</body>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"  class="index">
+<head>
+	<meta charset="utf-8" >
+	<meta name="description" content="home" />
+	<meta name="keywords" content="HTML5, budget" />
+	<meta name="author" content=""  />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link type="text/css" rel="stylesheet" href= "{% static 'styles/styles.css' %}"/>
+
+	<title>Budget: My Plan</title>
+</head>
+<body>
+	<header>
+		<h1 id="mainH">Header</h1>
+		
+		<div class="profile">
+			<p><a href="/profile">Profile</a>&nbsp&nbsp
+			<a href="/profile"><img id="proimg" src="{% static 'images/placeholder.png' %}" alt="Profile Picture" align="middle" style="width:5em;height:5em;"/></a></p>
+		</div>
+		
+		</br>
+		<div class="btn-group">
+			<form action="/budget"><button type="submit" id="active">My Plan</button></form>
+			<form action="/spending"><button type="submit">Actual Spending</button></form>
+			<form action="/reports"><button type="submit">Reports</button></form>
+		</div>
+		
+		<hr>
+		</br>
+	</header>
+
+	
+	<section>
+		<form method="post" action="#">
+			<p><b>Add Item to Budget</b></p>
+			<p>
+				<label for="bname">Name:</label> 
+				</br>
+				<input type="text" name="bname" id="bname" size="10" required="required"/>
+			</p>
+			<p>
+				<label for="value">Value ($):</label> 
+				</br>
+				<input type="text" name="pvalue" id="pvalue" size="10" required="required"/>
+			</p>
+			<p>
+				Type:
+				<p>
+					<input type="radio" id="income" name="type" value="income"/>
+					<label for="income">Income</label>
+				</p>
+				<p>
+					<input type="radio" id="spending" name="type" value="income" required="required"/>
+					<label for="spending">Spending</label>
+				</p>
+			</p>
+			<input type= "submit" value="Add"/>
+		</form>
+	</section>
+	
+	<section class="right">
+		<table>
+			<tr>
+				<th colspan="3">My Weekly Budget Items</th>
+			</tr>
+			<tr>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Value</th>
+			</tr>
+			<tr>
+				<td>Ex</td>
+				<td>Income</td>
+				<td>$10</td>
+				<td><button>Edit</button>
+				<button>Delete</button></td>
+			</tr>
+			<tr>
+				<td>Ex2</td>
+				<td>Spending</td>
+				<td>$1</td>
+				<td><button>Edit</button>
+				<button>Delete</button></td>
+			</tr>
+			<tr>
+				<th colspan='2'>Total Savings:</th>
+				<td>$9</td>
+				<td></td>
+			</tr>
+		</table>
+	</section>
+
+</body>
 </html>

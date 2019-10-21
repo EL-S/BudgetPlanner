@@ -48,3 +48,15 @@ def register_user(request):
         return redirect('/')
     else:
         return render(request, 'register.html', {'error': 'fill in all the fields'})
+
+def budget(request):
+    return render(request, 'budget.html', {})
+	
+def spending(request):
+    return render(request, 'spending.html', {})
+	
+def reports(request):
+    return render(request, 'reports.html', {})
+	
+def profile(request):
+    return render(request, 'profile.html', {})
