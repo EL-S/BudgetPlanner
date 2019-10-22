@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link type="text/css" rel="stylesheet" href= "{% static 'styles/styles.css' %}"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="{% static '/scripts/spending.js' %}"></script>   
 
 	<title>Budget: Actual Spending</title>
@@ -33,35 +34,35 @@
 	</header>
 
 	<section class="spending">
-		<h2><b>Input this Weeks Values (date)</b></h2>
-		<form method="post" action="#">
+		<h2 id="txtd"><b>Input this Weeks Values (date)</b></h2>
+		<form onsubmit="calcSaved(); return false;">
 			<label for="wage">Wage:</label> 
-			<input type="text" name="wage" id="wage" size="20" required="required"/>
+			<input type="text" name="wage" id="wage" size="20" pattern="[0-9.]*" required="required"/>
 			</br>
 			<label for="allowance">Allowance:</label> 
-			<input type="text" name="allowance" id="allowance" size="20" required="required"/>
+			<input type="text" name="allowance" id="allowance" pattern="[0-9.]*" size="20"/>
 			</br>
 			<label for="food">Food:</label> 
-			<input type="text" name="food" id="food" size="20" required="required"/>
+			<input type="text" name="food" id="food" pattern="[0-9.]*" size="20"/>
 			</br>
 			<label for="phone">Phone Bill:</label> 
-			<input type="text" name="phone" id="phone" size="20" required="required"/>
+			<input type="text" name="phone" id="phone" pattern="[0-9.]*" size="20"/>
 			</br>
 			<label for="utilities">Utilities:</label> 
-			<input type="text" name="utilities" id="utilities" size="20" required="required"/>
+			<input type="text" name="utilities" id="utilities" pattern="[0-9.]*" size="20"/>
 			</br>
 			<label for="rent">Rent:</label> 
-			<input type="text" name="rent" id="rent" size="20" required="required"/>
+			<input type="text" name="rent" id="rent" pattern="[0-9.]*" size="20"/>
 			</br>
 			<label for="internet">Internet:</label> 
-			<input type="text" name="internet" id="internet" size="20" required="required"/>
+			<input type="text" name="internet" id="internet" pattern="[0-9.]*" size="20" />
 			</br>
 			<input type= "submit" value="Submit"/>
 		</form>
 	</section>
 	
 	<section>
-		<p id="saved">This Week You Saved $</p>
+		<p id="saved">This Week You Saved: $</p>
 	</section>
 	
 </body>
