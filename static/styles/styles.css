@@ -7,17 +7,24 @@
 	float: left; /* Float the buttons side by side */
 }
 
-btn-group {
-	float: left;
-	display: inline;
+.btn-group{
+	border-bottom: 1px solid black;
+	clear: both;
+	position: relative;
 }
 
 #active{
 	background-color: #FFFFFF;
+	border-bottom: 1px solid white;
+	transform: translateY(2%);
+}
+
+form {
+	dispaly: inline;
 }
 
 .btn-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
+  border-right: 0; /* Prevent double borders */
 }
 
 /* Clear floats (clearfix hack) */

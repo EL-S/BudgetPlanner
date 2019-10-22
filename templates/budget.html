@@ -9,6 +9,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link type="text/css" rel="stylesheet" href= "{% static 'styles/styles.css' %}"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="{% static '/scripts/budget.js' %}"></script>   
 
 	<title>Budget: My Plan</title>
 </head>
@@ -28,13 +30,12 @@
 			<form action="/reports"><button type="submit">Reports</button></form>
 		</div>
 		
-		<hr>
 		</br>
 	</header>
 
 	
 	<section>
-		<form method="post" action="#">
+		<form onsubmit="addTableRow(); return false;">
 			<p><b>Add Item to Budget</b></p>
 			<p>
 				<label for="bname">Name:</label> 
@@ -44,16 +45,16 @@
 			<p>
 				<label for="value">Value ($):</label> 
 				</br>
-				<input type="text" name="pvalue" id="pvalue" size="10" required="required"/>
+				<input type="text" name="pvalue" pattern="[0-9]*" id="pvalue" size="10" required="required"/>
 			</p>
 			<p>
 				Type:
 				<p>
-					<input type="radio" id="income" name="type" value="income"/>
+					<input type="radio" id="income" name="type" value="Income"/>
 					<label for="income">Income</label>
 				</p>
 				<p>
-					<input type="radio" id="spending" name="type" value="income" required="required"/>
+					<input type="radio" id="spending" name="type" value="Spending" required="required"/>
 					<label for="spending">Spending</label>
 				</p>
 			</p>
@@ -62,7 +63,7 @@
 	</section>
 	
 	<section class="right">
-		<table>
+		<table id="tb">
 			<tr>
 				<th colspan="3">My Weekly Budget Items</th>
 			</tr>
@@ -72,22 +73,8 @@
 				<th>Value</th>
 			</tr>
 			<tr>
-				<td>Ex</td>
-				<td>Income</td>
-				<td>$10</td>
-				<td><button>Edit</button>
-				<button>Delete</button></td>
-			</tr>
-			<tr>
-				<td>Ex2</td>
-				<td>Spending</td>
-				<td>$1</td>
-				<td><button>Edit</button>
-				<button>Delete</button></td>
-			</tr>
-			<tr>
 				<th colspan='2'>Total Savings:</th>
-				<td>$9</td>
+				<td id="total"></td>
 				<td></td>
 			</tr>
 		</table>
