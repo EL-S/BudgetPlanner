@@ -16,6 +16,7 @@ function drawPieChart() {
     });
 }
 
+// Selects canvas for line chart and draws it
 function drawLineChart() {
     var ctx = document.getElementById('lineChart');
     new Chart(ctx, {
@@ -33,6 +34,7 @@ function drawLineChart() {
     });
 }
 
+// Selects canvas for bar chart and draws it
 function drawBarChart() {
     var ctx = document.getElementById('barChart');
     new Chart(ctx, {
