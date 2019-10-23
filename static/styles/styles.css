@@ -1,3 +1,7 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
 .btn-group button {
 	background-color: #DDDDDD; /* Green background */
 	border: 1px solid black; /* Green border */
