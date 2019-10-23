@@ -5,11 +5,10 @@ from django.template.loader import get_template
 import Application.database
 
 def index(request):
-    if request.method == 'GET':
-        variables = request.GET
-    elif request.method == 'POST':
-        variables = request.POST
-    return render(request, 'index.html', {'cookies': request.COOKIES, 'files': request.FILES, 'variables': variables, 'request_type': request.method, 'headers': request.headers})
+    if Application.database.check_login(request):
+        return render(request, 'budget.html', {})
+    else:
+        return render(request, 'index.html', {})
 
 def some_path(request):
     # this is a comment, if you want a link to this file/function, add it to the urls.py file in the BudgetPlanner directory
@@ -32,7 +31,10 @@ def login_user(request):
         result = Application.database.login(variables['username'], variables['password'])
         print(result)
         if result == "login successful":
-            return redirect('/')
+            response = redirect('/')
+            response.set_cookie("username", variables['username'])
+            response.set_cookie("password", variables['password'])
+            return response
         else:
             return render(request, 'login.html', {'error': result})
     else:
@@ -61,13 +63,25 @@ def register_user(request):
         return render(request, 'register.html', {'error': 'fill in all the fields'})
 
 def budget(request):
-    return render(request, 'budget.html', {})
+    if Application.database.check_login(request):
+        return render(request, 'budget.html', {})
+    else:
+        return login(request)
 	
 def spending(request):
-    return render(request, 'spending.html', {})
+    if Application.database.check_login(request):
+        return render(request, 'spending.html', {})
+    else:
+        return login(request)
 	
 def reports(request):
-    return render(request, 'reports.html', {})
+    if Application.database.check_login(request):
+        return render(request, 'reports.html', {})
+    else:
+        return login(request)
 	
 def profile(request):
-    return render(request, 'profile.html', {})
+    if Application.database.check_login(request):
+        return render(request, 'profile.html', {})
+    else:
+        return login(request)

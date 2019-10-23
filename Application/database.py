@@ -22,6 +22,19 @@ def connect_to_db():
                      timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL);''')
     return connection,cursor
     
+def check_login(request):
+    username = request.COOKIES.get('username')
+    password = request.COOKIES.get('password')
+
+    if username is None or password is None:
+        return False
+    else:
+        if 'successful' in login(username, password):
+            return True
+        else:
+            return False
+
+
 def login(username, password):
     connection,cursor = connect_to_db()
     cursor.execute("SELECT password,salt FROM users WHERE username=?", [username])
