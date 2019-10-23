@@ -40,8 +40,8 @@ function weekDates() {
 	var firstday = new Date(curr.setDate(first));
 	var lastday = new Date(curr.setDate(last));
 	
-	var firstformat = firstday.getDate() + "/" + firstday.getMonth() + "/" + firstday.getFullYear();
-	var lastformat = lastday.getDate() + "/" + lastday.getMonth() + "/" + lastday.getFullYear();
+	var firstformat = firstday.getDate() + "/" + (parseInt(firstday.getMonth()) + 1)  + "/" + firstday.getFullYear();
+	var lastformat = lastday.getDate() + "/" + (parseInt(lastday.getMonth()) + 1) + "/" + lastday.getFullYear();
 	
 	txt.innerHTML = "<b>Input this Weeks Values (" + firstformat + "-" + lastformat + ")</b>";
 }

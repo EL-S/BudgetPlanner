@@ -76,7 +76,3 @@ def hash_password(password,salt):
     hashGen.update(salted_str)
     hashed_password = hashGen.hexdigest()
     return hashed_password
-
-print(login("admin4","password"))
-print(register_user("admin4", "budgetplannerswe@gmail.com", "password", "password"))
-print(login("admin4","password"))
