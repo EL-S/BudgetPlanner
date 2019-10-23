@@ -1,38 +1,12 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en"  class="index">
-<head>
-	<meta charset="utf-8" >
-	<meta name="description" content="home" />
-	<meta name="keywords" content="HTML5, budget" />
-	<meta name="author" content=""  />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link type="text/css" rel="stylesheet" href= "{% static 'styles/styles.css' %}"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script src="{% static '/scripts/spending.js' %}"></script>   
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="{% static '/scripts/spending.js' %}"></script>  
+{% endblock %}
 
-	<title>Budget: Actual Spending</title>
-</head>
-<body>
-	<header>
-		<h1 id="mainH">Header</h1>
-		
-		<div class="profile">
-			<p><a href="/profile">Profile</a>&nbsp&nbsp
-			<a href="/profile"><img id="proimg" src="{% static 'images/placeholder.png' %}" alt="Profile Picture" align="middle" style="width:5em;height:5em;"/></a></p>
-		</div>
-		
-		</br>
-		<div class="btn-group">
-			<form action="/budget"><button type="submit">My Plan</button></form>
-			<form action="/spending"><button type="submit" id="active">Actual Spending</button></form>
-			<form action="/reports"><button type="submit">Reports</button></form>
-		</div>
-		
-		</br>
-	</header>
-
+{% block content %}
 	<section class="spending">
 		<h2 id="txtd"><b>Input this Weeks Values (date)</b></h2>
 		<form onsubmit="calcSaved(); return false;">
@@ -64,6 +38,4 @@
 	<section>
 		<p id="saved">This Week You Saved: $</p>
 	</section>
-	
-</body>
-</html>
+{% endblock %}
