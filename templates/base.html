@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"  class="index">
+<head>
+	<meta charset="utf-8" >
+	<meta name="description" content="home" />
+	<meta name="keywords" content="HTML5, budget" />
+	<meta name="author" content=""  />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link type="text/css" rel="stylesheet" href= "{% static 'styles/styles.css' %}"/>
+    {% block script %} 
+    {% endblock %}
+
+	<title>{% block title %}Budget: {{ title }}{% endblock %}</title>
+</head>
+
+<body>
+    {% block header %}
+    <header>
+		<h1 id="mainH">Budget Planner</h1>
+		
+		<div class="profile">
+			<p><a href="/profile">Profile</a>&nbsp&nbsp
+			<a href="/profile"><img id="proimg" src="{% static 'images/placeholder.png' %}" alt="Profile Picture" align="middle" style="width:5em;height:5em;"/></a></p>
+		</div>
+		
+		</br>
+		<div class="btn-group">
+			<form action="/budget"><button type="submit" {% if title == 'My Plan' %}id="active"{% endif %}>My Plan</button></form>
+			<form action="/spending"><button type="submit" {% if title == 'Actual Spending' %}id="active"{% endif %}>Actual Spending</button></form>
+			<form action="/reports"><button type="submit" {% if title == 'Reports' %}id="active"{% endif %}>Reports</button></form>
+		</div>
+		
+		</br>
+	</header>
+    {% endblock %}
+
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

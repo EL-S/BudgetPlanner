@@ -64,19 +64,19 @@ def register_user(request):
 
 def budget(request):
     if Application.database.check_login(request):
-        return render(request, 'budget.html', {})
+        return render(request, 'budget.html', {'title': 'My Plan'})
     else:
         return login(request)
 	
 def spending(request):
     if Application.database.check_login(request):
-        return render(request, 'spending.html', {})
+        return render(request, 'spending.html', {'title': 'Actual Spending'})
     else:
         return login(request)
 	
 def reports(request):
     if Application.database.check_login(request):
-        return render(request, 'reports.html', {})
+        return render(request, 'reports.html', {'title': 'Reports'})
     else:
         return login(request)
 	
