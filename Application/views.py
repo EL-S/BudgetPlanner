@@ -6,9 +6,9 @@ import Application.database
 
 def index(request):
     if Application.database.check_login(request):
-        return render(request, 'budget.html', {})
+        return render(request, 'budget.html', {'title': 'My Plan'})
     else:
-        return render(request, 'index.html', {})
+        return render(request, 'index.html', {'check_login': Application.database.check_login(request)})
 
 def some_path(request):
     # this is a comment, if you want a link to this file/function, add it to the urls.py file in the BudgetPlanner directory
@@ -17,7 +17,13 @@ def some_path(request):
 # login page
 def login(request): 
     # this is a comment, if you want a link to this file/function, add it to the urls.py file in the BudgetPlanner directory
-    return render(request, 'login.html', {'login': 'username'})
+    if Application.database.check_login(request):
+        return render(request, 'budget.html', {'title': 'My Plan'})
+    else:
+        return render(request, 'login.html', {'login': 'username'})
+
+def login_redirect(request, message):
+    return render(request, 'login.html', {'login': 'username', 'message': message})
 
 # processes login post request
 def login_user(request):
@@ -66,22 +72,22 @@ def budget(request):
     if Application.database.check_login(request):
         return render(request, 'budget.html', {'title': 'My Plan'})
     else:
-        return login(request)
+        return login_redirect(request, 'Please login to view this page')
 	
 def spending(request):
     if Application.database.check_login(request):
         return render(request, 'spending.html', {'title': 'Actual Spending'})
     else:
-        return login(request)
+        return login_redirect(request, 'Please login to view this page')
 	
 def reports(request):
     if Application.database.check_login(request):
         return render(request, 'reports.html', {'title': 'Reports'})
     else:
-        return login(request)
+        return login_redirect(request, 'Please login to view this page')
 	
 def profile(request):
     if Application.database.check_login(request):
-        return render(request, 'profile.html', {'title': 'Profile'})
+        return render(request, 'profile.html', {'check_login': Application.database.check_login(request)})
     else:
-        return login(request)
+        return login_redirect(request, 'Please login to view this page')

@@ -1,25 +1,32 @@
- <form action="/register_user" method="post">
-	{% csrf_token %}
-	<div class="container">
-		<label for="username"><b>Username</b></label>
-		<input type="text" placeholder="Enter Username" name="username" required><br /><br />
+{% extends "base.html" %}
+{% load static %}
 
-		<label for="password"><b>Password</b></label>
-		<input type="password" placeholder="Enter Password" name="password" required><br /><br />
+{% block nav %}{% endblock %}
 
-		<label for="password_confirm"><b>Confirm Password</b></label>
-		<input type="password" placeholder="Enter Password" name="password_confirm" required><br /><br />
+{% block content %}
+	<form action="/register_user" method="post">
+		{% csrf_token %}
+		<div class="container">
+			<label for="username"><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="username" required><br /><br />
 
-		<label for="email"><b>Email</b></label>
-		<input type="email" placeholder="Enter Email" name="email" required><br /><br />
-		<p>{{ error }}</p>
-		<button type="submit">Register</button>
-		<label>
-			<input type="checkbox" checked="checked" name="remember"> Remember me
-		</label>
-	</div>
+			<label for="password"><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="password" required><br /><br />
 
-	<div class="container" style="background-color:#f1f1f1">
-		<button type="button" class="cancelbtn">Cancel</button>
-	</div>
-</form> 
+			<label for="password_confirm"><b>Confirm Password</b></label>
+			<input type="password" placeholder="Enter Password" name="password_confirm" required><br /><br />
+
+			<label for="email"><b>Email</b></label>
+			<input type="email" placeholder="Enter Email" name="email" required><br /><br />
+			<p>{{ error }}</p>
+			<button type="submit">Register</button>
+			<label>
+				<input type="checkbox" checked="checked" name="remember"> Remember me
+			</label>
+		</div>
+
+		<div class="container" style="background-color:#f1f1f1">
+			<button type="button" class="cancelbtn">Cancel</button>
+		</div>
+	</form> 
+{% endblock %}

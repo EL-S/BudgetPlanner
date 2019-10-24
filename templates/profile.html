@@ -1,13 +1,21 @@
+{% extends "base.html" %}
 {% load static %}
-{% csrf_token %}
-<html>
-	<head>
-		<title>Budget: My Plan</title>
-	</head>
 
-	<body>
-		<h1>Profile</h1>
-		<img id="proimg" src="{% static 'images/placeholder.png' %}" alt="Profile Picture" align="middle" style="width:5em;height:5em;"/>
-		<p>Username: {{ username }}</p>
-	</body>
-</html>
+{% block nav %}{% endblock %}
+
+{% block profile %}{% endblock %}
+
+{% block content %}
+	{% csrf_token %}
+	<html>
+		<head>
+			<title>Budget: My Plan</title>
+		</head>
+
+		<body>
+			<h2>Profile</h2>
+			<img id="proimg" src="{% static 'images/placeholder.png' %}" alt="Profile Picture" align="middle" style="width:5em;height:5em;"/>
+			<p>Username: {{ username }}</p>
+		</body>
+	</html>
+{% endblock %}
