@@ -82,6 +82,6 @@ def reports(request):
 	
 def profile(request):
     if Application.database.check_login(request):
-        return render(request, 'profile.html', {})
+        return render(request, 'profile.html', {'title': 'Profile'})
     else:
         return login(request)

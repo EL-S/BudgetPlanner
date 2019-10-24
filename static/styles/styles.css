@@ -109,3 +109,9 @@ section table {
 	font-size: 24pt;
 	transform: translateY(250%);
 }
+
+.charts div{
+	display: block;
+	float: left;
+	padding-left: 30px;
+}
