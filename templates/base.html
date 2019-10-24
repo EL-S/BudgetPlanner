@@ -19,23 +19,30 @@
     {% block header %}
     <header>
 		<h1 id="mainH">Budget Planner</h1>
-		
+        
+        {% block profile %}
 		<div class="profile">
 			<p><a href="/profile">Profile</a>&nbsp&nbsp
 			<a href="/profile"><img id="proimg" src="{% static 'images/placeholder.png' %}" alt="Profile Picture" align="middle" style="width:5em;height:5em;"/></a></p>
+			<p id="uname">{{username}}</p>
 		</div>
-		
-		</br>
+        {% endblock %}
+        </br>
+    </header>
+    
+    {% endblock %}
+
+    {% block nav %}
+    <nav>
 		<div class="btn-group">
 			<form action="/budget"><button type="submit" {% if title == 'My Plan' %}id="active"{% endif %}>My Plan</button></form>
 			<form action="/spending"><button type="submit" {% if title == 'Actual Spending' %}id="active"{% endif %}>Actual Spending</button></form>
 			<form action="/reports"><button type="submit" {% if title == 'Reports' %}id="active"{% endif %}>Reports</button></form>
-		</div>
-		
-		</br>
-	</header>
+        </div>
+        </br>
+    </nav>
     {% endblock %}
-
+    
     <div id="content">
         {% block content %}
         {% endblock %}

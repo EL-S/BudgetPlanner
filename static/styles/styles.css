@@ -82,6 +82,12 @@ h1 {
 	transform: translateY(-85%);
 }
 
+.profile #uname {
+	position: absolute;
+	transform: translateY(-85%);
+	right: 15%;
+}
+
 section {
 	float: left;
 	margin-right: 5em;
@@ -100,12 +106,14 @@ section {
 	width: 145px;
 }
 
-section table {
-	transform: translateY(10%);
-}
-
 #saved {
 	align: center;
 	font-size: 24pt;
 	transform: translateY(250%);
+}
+
+.charts div{
+	display: block;
+	float: left;
+	padding-left: 30px;
 }
