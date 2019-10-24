@@ -82,6 +82,12 @@ h1 {
 	transform: translateY(-85%);
 }
 
+.profile #uname {
+	position: absolute;
+	transform: translateY(-85%);
+	right: 15%;
+}
+
 section {
 	float: left;
 	margin-right: 5em;
@@ -98,10 +104,6 @@ section {
 
 .spending form input:last-child {
 	width: 145px;
-}
-
-section table {
-	transform: translateY(10%);
 }
 
 #saved {
