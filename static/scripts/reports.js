@@ -1,5 +1,9 @@
 "use strict";
 
+// Defines colours
+var red = "rgba(200,0,0,0.5)";
+var green = "rgba(0,200,0,0.5)";
+
 // Selects canvas for pie chart and draws it
 function drawPieChart() {
     var ctx = document.getElementById('pieChart');
@@ -27,7 +31,8 @@ function drawLineChart() {
                 "fill":false,
                 "label":"Total Savings ($)",
                 "data":[10, 5, 0, 10, 15],
-                "borderColor":"rgb(75, 192, 192)",
+                "borderColor":green,
+                "backgroundColor":green,
                 "lineTension":0.1
             }]
         }
@@ -36,15 +41,13 @@ function drawLineChart() {
 
 // Selects canvas for bar chart and draws it
 function drawBarChart() {
-    var red = "rgba(200,0,0,0.5)";
-    var green = "rgba(0,200,0,0.5)";
     var ctx = document.getElementById('barChart');
     new Chart(ctx, {
         "type":"bar",
         "data":{
             "labels":["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
             "datasets":[{
-                "label":"Weekly Savings",
+                "label":"Weekly Savings ($)",
                 "data":[10, -5, -3, 7, 5],
                 "backgroundColor":[green, red, red, green, green]
             }]
