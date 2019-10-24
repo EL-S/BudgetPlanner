@@ -3,6 +3,8 @@
 
 {% block nav %}{% endblock %}
 
+{% block profile %}{% endblock %}
+
 {% block content %}
 	<p>{{ message }}</p>
 	<form action="/login_user" method="post">
@@ -23,6 +25,11 @@
 		<div class="container" style="background-color:#f1f1f1">
 			<button type="button" class="cancelbtn">Cancel</button>
 			<span class="psw">Forgot <a href="#">password?</a></span>
+		</div>
+
+		<div class="container">
+			<p>Don't have an account?</p>
+			<p><a href= "/register">Register</a> one here</p>
 		</div>
 	</form> 
 {% endblock %}

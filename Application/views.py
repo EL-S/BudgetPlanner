@@ -8,7 +8,7 @@ def index(request):
     if Application.database.check_login(request):
         return render(request, 'budget.html', {'title': 'My Plan'})
     else:
-        return render(request, 'index.html', {'check_login': Application.database.check_login(request)})
+        return render(request, 'index.html', {})
 
 def some_path(request):
     # this is a comment, if you want a link to this file/function, add it to the urls.py file in the BudgetPlanner directory
@@ -88,6 +88,6 @@ def reports(request):
 	
 def profile(request):
     if Application.database.check_login(request):
-        return render(request, 'profile.html', {'check_login': Application.database.check_login(request)})
+        return render(request, 'profile.html', {})
     else:
         return login_redirect(request, 'Please login to view this page')
