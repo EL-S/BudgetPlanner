@@ -36,6 +36,8 @@ function drawLineChart() {
 
 // Selects canvas for bar chart and draws it
 function drawBarChart() {
+    var red = "rgba(200,0,0,0.5)";
+    var green = "rgba(0,200,0,0.5)";
     var ctx = document.getElementById('barChart');
     new Chart(ctx, {
         "type":"bar",
@@ -43,8 +45,8 @@ function drawBarChart() {
             "labels":["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
             "datasets":[{
                 "label":"Weekly Savings",
-                "data":[10, -5, -5, 10, 5],
-                "backgroundColor":["rgba(0,200,0,0.5)", "rgba(200,0,0,0.5)", "rgba(200,0,0,0.5)", "rgba(0,200,0,0.5)", "rgba(0,200,0,0.5)"]
+                "data":[10, -5, -3, 7, 5],
+                "backgroundColor":[green, red, red, green, green]
             }]
         }
     });
