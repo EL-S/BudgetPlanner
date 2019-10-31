@@ -70,6 +70,16 @@ def register_user(request):
 
 def budget(request):
     if Application.database.check_login(request):
+        # see if there is post
+        if request.method == 'POST':
+            variables = request.POST
+            fields = ['bname','pvalue','type']
+            if all(field in variables for field in fields):
+                print(variables)
+                result = Application.database.add_planned_item(variables['bname'], variables['type'], variables['pvalue'], request.COOKIES.get('username'))
+                print(result)
+                if "successful" not in result:
+                    return render(request, 'register.html', {'error': result})
         return render(request, 'budget.html', {'title': 'My Plan', 'username': request.COOKIES.get('username')})
     else:
         return login_redirect(request, 'Please login to view this page')

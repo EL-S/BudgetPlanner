@@ -101,3 +101,24 @@ def hash_password(password,salt):
     hashGen.update(salted_str)
     hashed_password = hashGen.hexdigest()
     return hashed_password
+
+def add_planned_item(name, item_type, value, username):
+    connection,cursor = connect_to_db()
+    cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
+    row = cursor.fetchone()
+
+    if not row:
+        return "user does not exist"
+
+    cursor.execute("INSERT INTO planned_budget (name, type, value, user_id) Values (?,?,?,?)", [name, item_type, value, row[0]])
+
+    cursor.execute("SELECT * FROM planned_budget WHERE name=?", [name])
+    rows = cursor.fetchone()
+    
+    for row in rows:
+        print(row)
+
+    connection.rollback()
+    connection.close()
+
+    return "successful"

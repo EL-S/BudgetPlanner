@@ -8,30 +8,33 @@
 
 {% block content %}
 	<section>
-		<form onsubmit="addTableRow(); return false;">
-			<p><b>Add Item to Budget</b></p>
-			<p>
-				<label for="bname">Name:</label> 
-				</br>
-				<input type="text" name="bname" id="bname" size="10" required="required"/>
-			</p>
-			<p>
-				<label for="value">Value ($):</label> 
-				</br>
-				<input type="text" name="pvalue" pattern="[0-9.]*" id="pvalue" size="10" required="required"/>
-			</p>
-			<p>
-				Type:
+		<form action="/budget" method="POST">
+			{% csrf_token %}
+			<div class="container"></div>
+				<p><b>Add Item to Budget</b></p>
 				<p>
-					<input type="radio" id="income" name="type" value="Income"/>
-					<label for="income">Income</label>
+					<label for="bname">Name:</label> 
+					</br>
+					<input type="text" name="bname" id="bname" size="10" required="required"/>
 				</p>
 				<p>
-					<input type="radio" id="spending" name="type" value="Spending" required="required"/>
-					<label for="spending">Spending</label>
+					<label for="value">Value ($):</label> 
+					</br>
+					<input type="text" name="pvalue" pattern="[0-9.]*" id="pvalue" size="10" required="required"/>
 				</p>
-			</p>
-			<input type= "submit" value="Add"/>
+				<p>
+					Type:
+					<p>
+						<input type="radio" id="income" name="type" value="Income"/>
+						<label for="income">Income</label>
+					</p>
+					<p>
+						<input type="radio" id="spending" name="type" value="Spending" required="required"/>
+						<label for="spending">Spending</label>
+					</p>
+				</p>
+				<input type= "submit" value="Add"/>
+			</div>
 		</form>
 	</section>
 	
