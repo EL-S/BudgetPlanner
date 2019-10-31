@@ -101,3 +101,27 @@ def hash_password(password,salt):
     hashGen.update(salted_str)
     hashed_password = hashGen.hexdigest()
     return hashed_password
+
+def reports_pie_chart_query(username):
+    connection,cursor = connect_to_db()
+    cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
+    rows = cursor.fetchall()
+
+    if not rows:
+        return "error retrieving data"
+    
+    try:
+        user_id = row[0][0]
+        cursor.execute("SELECT name, value FROM planned_budget WHERE user_id=? AND type='spending'", [user_id])
+        plan_items = cursor.fetchall()
+
+        if not plan_items:
+            return "error retrieving data"
+        
+        try:
+            return plan_items
+        except:
+            return "error retrieving data"
+    except:
+        return "error retrieving data"
+        
