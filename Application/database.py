@@ -20,6 +20,18 @@ def connect_to_db():
                      confirmation varchar(128) NOT NULL,
                      email varchar(128) NOT NULL,
                      timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL);''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS planned_budget
+                    (budget_item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                     name varchar(32) NOT NULL,
+                     type varchar(32) NOT NULL,
+                     value float NOT NULL,
+                     user_id integer NOT NULL,
+                     FOREIGN KEY(user_id) REFERENCES users(user_id));''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS spending
+                    (spending_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                     value varchar(32) NOT NULL,
+                     budget_item_id integer NOT NULL,
+                     FOREIGN KEY(budget_item_id) REFERENCES planned_budget(budget_item_id));''')    
     return connection,cursor
     
 def check_login(request):
