@@ -1,6 +1,5 @@
 import unittest
 import sqlite3
-import contextlib
 import os
 from Application.database import *
 
