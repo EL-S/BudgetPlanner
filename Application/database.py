@@ -33,6 +33,7 @@ def connect_to_db():
                      budget_item_id integer NOT NULL,
                      FOREIGN KEY(budget_item_id) REFERENCES planned_budget(budget_item_id));''')    
     return connection,cursor
+
     
 def check_login(request):
     username = request.COOKIES.get('username')
@@ -102,6 +103,17 @@ def hash_password(password,salt):
     hashed_password = hashGen.hexdigest()
     return hashed_password
 
+import sqlite3
+import hashlib
+from random import randint
+from base64 import b64encode
+from os import urandom
+from Application.send_email import *
+from Application.config import settings
+
+admin_email = settings['email']
+admin_password = settings['email_password']
+
 def add_planned_item(name, item_type, value, username):
     connection,cursor = connect_to_db()
     cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
@@ -118,7 +130,30 @@ def add_planned_item(name, item_type, value, username):
     for row in rows:
         print(row)
 
-    connection.rollback()
+    connection.commit()
     connection.close()
 
     return "successful"
+
+    
+#Get rows from database and return list
+def get_rows(username):
+    connection,cursor = connect_to_db()
+    cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
+    row = cursor.fetchone()
+
+    if not row:
+        return "user does not exist"
+
+    cursor.execute("SELECT * FROM planned_budget WHERE user_id=?", [row[0]])
+    rows = cursor.fetchall()
+
+    #to javascript array
+    jstring = ""
+    for row in rows:
+        for r in row:
+            jstring += str(r) + ","
+
+    connection.close()
+
+    return jstring

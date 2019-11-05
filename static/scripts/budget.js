@@ -38,11 +38,11 @@ function addTableRow() {
 		
 	var str = $('form').serialize();
 	var ar = str.replace("bname=", "").replace("&pvalue=", ",").replace("&type=", ",").split(',');
-	
+    
 	//add to database: 
 	var bname = ar[0];
 	var btype = ar[2];
-	var bvalue = ar[1];
+	var bvalue = Math.round(parseFloat(ar[1]) * 100) / 100;
 	
 	var i = rows.length - 2;
 	
@@ -59,18 +59,21 @@ function addRowsFromDatabase() {
 	var total = 0;
 	
 	//Get Data from database :
-	
-	//For each item in database for user
-	//for(var i = 0; i < db.length; i++;) {
-	var bname = "test"
-	var btype = "Spending"
-	var bvalue = 1
-	
-	var i = 0;
-	
-    // pick the last and prepend
-	rows[rows.length - 1].insertAdjacentHTML('beforebegin', "<td>" + bname + "</td><td>" + btype + "</td><td>$" + bvalue + "</td><td><form onsubmit='deleteRow(" + i + ")' id='r" + i + "'><button>Delete</button></form></td>");
-	// }
+    
+    //var ar = db.toString().replace(/[\[\(]|[']|[\)\]]|[ ]/g, "").split(',');
+    if(db.toString() != "") {
+        var ar = db.toString().trim().replace(/,$/g,"").split(',');
+
+        //For each item in database for user
+        for(var i = 0; i < ar.length/5; i++) {
+        var bname = ar[i*5 + 1]
+        var btype = ar[i*5 + 2]
+        var bvalue = ar[i*5 + 3]
+        
+        // pick the last and prepend
+        rows[rows.length - 1].insertAdjacentHTML('beforebegin', "<td>" + bname + "</td><td>" + btype + "</td><td>$" + bvalue + "</td><td><form onsubmit='deleteRow(" + i + ")' id='r" + i + "'><button>Delete</button></form></td>");
+        }
+        }
 	
 	calcTotal();
 }
