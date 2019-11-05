@@ -33,7 +33,6 @@ def update_database(request):
     variables = request.POST
     fields = ['bname', 'pvalue', 'type']
     if all(field in variables for field in fields): # if the user filled in all the fields
-        print(variables)
         Application.database.add_planned_item(variables['bname'], variables['type'], variables['pvalue'], request.COOKIES.get('username'))
     return redirect('/budget')
 
@@ -45,7 +44,6 @@ def del_item(request):
     variables = request.POST
     fields = ['rowNum']
     if all(field in variables for field in fields): # if the user filled in all the fields
-        print(variables)
         Application.database.delete_row(variables['rowNum'], request.COOKIES.get('username'))
     return redirect('/budget')
 

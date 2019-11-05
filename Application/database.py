@@ -126,9 +126,6 @@ def add_planned_item(name, item_type, value, username):
 
     cursor.execute("SELECT * FROM planned_budget WHERE name=?", [name])
     rows = cursor.fetchone()
-    
-    for row in rows:
-        print(row)
 
     connection.commit()
     connection.close()
