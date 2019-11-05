@@ -50,6 +50,23 @@ function addTableRow() {
 	calcTotal();
 }
 
+//Get cookie
+function getCookie(name) {
+	var cookieValue = null;
+	if (document.cookie && document.cookie != '') {
+		var cookies = document.cookie.split(';');
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = jQuery.trim(cookies[i]);
+			// Does this cookie string begin with the name we want?
+			if (cookie.substring(0, name.length + 1) == (name + '=')) {
+				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+			break;
+		}
+	}
+	}
+	return cookieValue;
+   }
+
 //Add data from database to table
 function addRowsFromDatabase() {
 	var table = document.getElementById('tb');
@@ -68,10 +85,11 @@ function addRowsFromDatabase() {
         for(var i = 0; i < ar.length/5; i++) {
         var bname = ar[i*5 + 1]
         var btype = ar[i*5 + 2]
-        var bvalue = ar[i*5 + 3]
-        
+		var bvalue = ar[i*5 + 3]
+		
+        var csrftoken = getCookie('csrftoken');
         // pick the last and prepend
-        rows[rows.length - 1].insertAdjacentHTML('beforebegin', "<td>" + bname + "</td><td>" + btype + "</td><td>$" + bvalue + "</td><td><form onsubmit='deleteRow(" + i + ")' id='r" + i + "'><button>Delete</button></form></td>");
+        rows[rows.length - 1].insertAdjacentHTML('beforebegin', "<td>" + bname + "</td><td>" + btype + "</td><td>$" + bvalue + "</td><td><form action='/del_item' method='post'>" + "<input type='hidden' name='csrfmiddlewaretoken' value='" + csrftoken + "'>" + "<input type='hidden' id='rowNum' name='rowNum' value='" + i + "'/><input type='submit' value='Delete'/></form></td>");
         }
         }
 	

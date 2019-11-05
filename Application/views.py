@@ -25,6 +25,30 @@ def login(request):
 def login_redirect(request, message):
     return render(request, 'login.html', {'login': 'username', 'message': message})
 
+#updates database when added from budget page
+def update_database(request):
+    # perform the login and redirect to the correct page
+    if request.method != 'POST':
+        return redirect('/budget')
+    variables = request.POST
+    fields = ['bname', 'pvalue', 'type']
+    if all(field in variables for field in fields): # if the user filled in all the fields
+        print(variables)
+        Application.database.add_planned_item(variables['bname'], variables['type'], variables['pvalue'], request.COOKIES.get('username'))
+    return redirect('/budget')
+
+#deletes a row from table
+def del_item(request):
+    # perform the login and redirect to the correct page
+    if request.method != 'POST':
+        return redirect('/budget')
+    variables = request.POST
+    fields = ['rowNum']
+    if all(field in variables for field in fields): # if the user filled in all the fields
+        print(variables)
+        Application.database.delete_row(variables['rowNum'], request.COOKIES.get('username'))
+    return redirect('/budget')
+
 # processes login post request
 def login_user(request):
     # perform the login and redirect to the correct page
@@ -37,7 +61,7 @@ def login_user(request):
         result = Application.database.login(variables['username'], variables['password'])
         print(result)
         if result == "login successful":
-            response = redirect('/')
+            response = redirect('/budget')
             response.set_cookie("username", variables['username'])
             response.set_cookie("password", variables['password'])
             return response

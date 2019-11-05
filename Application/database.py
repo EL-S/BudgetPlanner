@@ -122,7 +122,7 @@ def add_planned_item(name, item_type, value, username):
     if not row:
         return "user does not exist"
 
-    cursor.execute("INSERT INTO planned_budget (name, type, value, user_id) Values (?,?,?,?)", [name, item_type, value, row[0]])
+    cursor.execute("INSERT INTO planned_budget (name, type, value, user_id) Values (?,?,?,?)", [name, item_type, round(float(value), 2), row[0]])
 
     cursor.execute("SELECT * FROM planned_budget WHERE name=?", [name])
     rows = cursor.fetchone()
@@ -135,6 +135,23 @@ def add_planned_item(name, item_type, value, username):
 
     return "successful"
 
+def delete_row(row_num, username):
+    connection,cursor = connect_to_db()
+    cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
+    row = cursor.fetchone()
+
+    if not row:
+        return "user does not exist"
+
+    cursor.execute("SELECT * FROM planned_budget WHERE user_id=?", [row[0]])
+    rows = cursor.fetchall()
+
+    cursor.execute("DELETE FROM planned_budget WHERE budget_item_id=?", [rows[int(row_num)][0]])
+
+    connection.commit()
+    connection.close()
+
+    return "successful"
     
 #Get rows from database and return list
 def get_rows(username):

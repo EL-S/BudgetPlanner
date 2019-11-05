@@ -28,4 +28,6 @@ urlpatterns = [
     path('spending', views.spending),
     path('reports', views.reports),
     path('profile', views.profile),
+    path('update_database', views.update_database),
+    path('del_item', views.del_item)
 ]
