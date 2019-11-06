@@ -1,2 +1,1 @@
-python tests.py -v
-pause
+python manage.py test -v 2

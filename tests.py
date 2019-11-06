@@ -1,9 +1,9 @@
-import unittest
 import sqlite3
 import os
 from Application.database import *
+from django.test import Client, TestCase
 
-class TestDatabaseMethods(unittest.TestCase):
+class TestDatabaseMethods(TestCase):
 
     def test_a_connect_to_db(self):
         os.remove('user_data.db') # remove existing database
@@ -29,10 +29,29 @@ class TestDatabaseMethods(unittest.TestCase):
         self.assertEqual(login("admin", "password1"), "login successful")
 
         self.assertEqual(login("admin3", "password1"), "user does not exist")
-
+    
         self.assertEqual(login("admin2", "password2"), "incorrect password")
 
         self.assertEqual(login("admin2", "password1"), "login successful")
-# only run the tests if directly execute, eg. not imported by another file
+
+    def test_e_logout(self):
+        # create a pretend user
+        c = Client()
+
+        # log them in
+        response = c.post('/login_user', {'username': 'admin', 'password': 'password1'})
+
+        # check they are logged in
+        self.assertEqual(c.cookies['username'].value, 'admin')
+        self.assertEqual(c.cookies['password'].value, 'password1')
+
+        # log them out
+        response = c.get('/logout_user')
+
+        # check they are logged out
+        self.assertEqual(c.cookies['username'].value, '')
+        self.assertEqual(c.cookies['password'].value, '')
+        
+# only run the tests if directly executed, eg. not imported by another file
 if __name__ == '__main__':
     unittest.main()
