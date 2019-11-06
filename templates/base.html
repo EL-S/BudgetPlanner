@@ -25,6 +25,10 @@
 			<p><a href="/profile">Profile</a>&nbsp&nbsp
 			<a href="/profile"><img id="proimg" src="{% static 'images/placeholder.png' %}" alt="Profile Picture" align="middle" style="width:5em;height:5em;"/></a></p>
 			<p id="uname">{{username}}</p>
+			<form action="/logout_user" method="get">
+				{% csrf_token %}
+				<button type="submit">Logout</button>
+			</form>
 		</div>
         {% endblock %}
         </br>
