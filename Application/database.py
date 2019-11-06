@@ -132,6 +132,22 @@ def add_planned_item(name, item_type, value, username):
 
     return "successful"
 
+def get_planned_table(username):
+    connection,cursor = connect_to_db()
+    cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
+    row = cursor.fetchone()
+
+    if not row:
+        return "user does not exist"
+
+    cursor.execute("SELECT * FROM planned_budget WHERE user_id=?", [row[0]])
+    rows = dictfetchall(cursor)
+    
+    connection.commit()
+    connection.close()
+
+    return rows
+
 def delete_row(row_num, username):
     connection,cursor = connect_to_db()
     cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
@@ -171,3 +187,11 @@ def get_rows(username):
     connection.close()
 
     return jstring
+
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
