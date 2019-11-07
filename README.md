@@ -1,2 +1,8 @@
 # Budget Planning Web App
-1. Python Django webapp to budget plan.
+Python Django webapp to budget plan.
+
+requirements:
+- Django
+- sqlite3
+
+Check the wiki for more information.
