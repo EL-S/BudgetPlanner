@@ -6,7 +6,7 @@ import Application.database
 
 def index(request):
     if Application.database.check_login(request):
-        return render(request, 'budget.html', {'title': 'My Plan'})
+        return render(request, 'budget.html', {'title': 'My Plan', 'username': request.COOKIES.get('username')})
     else:
         return render(request, 'index.html', {})
 
@@ -15,10 +15,9 @@ def some_path(request):
     return render(request, 'template_name.html', {'the_variable_name': 'the variable value'})
 
 # login page
-def login(request): 
-    # this is a comment, if you want a link to this file/function, add it to the urls.py file in the BudgetPlanner directory
+def login(request):
     if Application.database.check_login(request):
-        return render(request, 'budget.html', {'title': 'My Plan'})
+        return render(request, 'budget.html', {'title': 'My Plan', 'username': request.COOKIES.get('username')})
     else:
         return render(request, 'login.html', {'login': 'username'})
 
@@ -55,9 +54,7 @@ def login_user(request):
     variables = request.POST
     fields = ['username', 'password']
     if all(field in variables for field in fields): # if the user filled in all the fields
-        print(variables)
         result = Application.database.login(variables['username'], variables['password'])
-        print(result)
         if result == "login successful":
             response = redirect('/budget')
             response.set_cookie("username", variables['username'])
@@ -67,6 +64,13 @@ def login_user(request):
             return render(request, 'login.html', {'error': result})
     else:
         return render(request, 'login.html', {'error': 'fill in all the fields'})
+
+# processes logout request
+def logout_user(request):
+    response = redirect('/')
+    response.delete_cookie("username")
+    response.delete_cookie("password")
+    return response
 
 # register page
 def register(request):
