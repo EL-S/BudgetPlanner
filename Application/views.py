@@ -103,7 +103,7 @@ def budget(request):
 	
 def spending(request):
     if Application.database.check_login(request):
-        return render(request, 'spending.html', {'title': 'Actual Spending', 'username': request.COOKIES.get('username')})
+        return render(request, 'spending.html', {'title': 'Actual Spending', 'username': request.COOKIES.get('username'), 'data_planned': Application.database.get_planned_table(request.COOKIES.get('username'))})
     else:
         return login_redirect(request, 'Please login to view this page')
 	
