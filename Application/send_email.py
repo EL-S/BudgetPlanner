@@ -132,9 +132,8 @@ def send_email(username,password,receiver,subject,content):
         message = "Subject: {}\nFrom: {}\nTo: {}\nContent-Type: text/html\n{}".format(subject,username,receiver,body)
 
         smtp_obj.sendmail(username, receiver, message)
-
-        smtp_obj.quit()
         return True
-    except Exception as e:
-        print(e)
+    except Exception:
         return False
+    finally:
+        smtp_obj.quit()
