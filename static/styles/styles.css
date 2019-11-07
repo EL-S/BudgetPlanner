@@ -80,6 +80,7 @@ h1 {
 	position: absolute;
 	right: 4px;
 	transform: translateY(-85%);
+	margin-top: 20px;
 }
 
 .profile #uname {

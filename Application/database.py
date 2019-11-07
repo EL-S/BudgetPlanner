@@ -33,6 +33,7 @@ def connect_to_db():
                      budget_item_id integer NOT NULL,
                      FOREIGN KEY(budget_item_id) REFERENCES planned_budget(budget_item_id));''')    
     return connection,cursor
+
     
 def check_login(request):
     username = request.COOKIES.get('username')
@@ -102,26 +103,71 @@ def hash_password(password,salt):
     hashed_password = hashGen.hexdigest()
     return hashed_password
 
-def reports_pie_chart_query(username):
+import sqlite3
+import hashlib
+from random import randint
+from base64 import b64encode
+from os import urandom
+from Application.send_email import *
+from Application.config import settings
+
+admin_email = settings['email']
+admin_password = settings['email_password']
+
+def add_planned_item(name, item_type, value, username):
     connection,cursor = connect_to_db()
     cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
+    row = cursor.fetchone()
+
+    if not row:
+        return "user does not exist"
+
+    cursor.execute("INSERT INTO planned_budget (name, type, value, user_id) Values (?,?,?,?)", [name, item_type, round(float(value), 2), row[0]])
+
+    cursor.execute("SELECT * FROM planned_budget WHERE name=?", [name])
+    rows = cursor.fetchone()
+
+    connection.commit()
+    connection.close()
+
+    return "successful"
+
+def delete_row(row_num, username):
+    connection,cursor = connect_to_db()
+    cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
+    row = cursor.fetchone()
+
+    if not row:
+        return "user does not exist"
+
+    cursor.execute("SELECT * FROM planned_budget WHERE user_id=?", [row[0]])
     rows = cursor.fetchall()
 
-    if not rows:
-        return "error retrieving data"
-    
-    try:
-        user_id = row[0][0]
-        cursor.execute("SELECT name, value FROM planned_budget WHERE user_id=? AND type='spending'", [user_id])
-        plan_items = cursor.fetchall()
+    cursor.execute("DELETE FROM planned_budget WHERE budget_item_id=?", [rows[int(row_num)][0]])
 
-        if not plan_items:
-            return "error retrieving data"
-        
-        try:
-            return plan_items
-        except:
-            return "error retrieving data"
-    except:
-        return "error retrieving data"
-        
+    connection.commit()
+    connection.close()
+
+    return "successful"
+    
+#Get rows from database and return list
+def get_rows(username):
+    connection,cursor = connect_to_db()
+    cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
+    row = cursor.fetchone()
+
+    if not row:
+        return "user does not exist"
+
+    cursor.execute("SELECT * FROM planned_budget WHERE user_id=?", [row[0]])
+    rows = cursor.fetchall()
+
+    #to javascript array
+    jstring = ""
+    for row in rows:
+        for r in row:
+            jstring += str(r) + ","
+
+    connection.close()
+
+    return jstring
