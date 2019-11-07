@@ -3,10 +3,10 @@
 
 //Gets info from form and calculates if the user lost or saved money
 function calcSaved() {	
-	var ar = $('form').serialize().replace("wage=", "").replace("&allowance=", ",").replace("&food=", ",").replace("&phone=", ",").replace("&utilities=", ",").replace("&rent=", ",").replace("&internet=", ",").split(",");
+	var ar = $('form').serialize().replace(/csrfmiddlewaretoken=[A-Za-z0-9]*&/g, "").replace("wage=", "").replace("&allowance=", ",").replace("&food=", ",").replace("&phone=", ",").replace("&utilities=", ",").replace("&rent=", ",").replace("&internet=", ",").split(",");
 	
 	var total = 0;
-	
+
 	for(var i = 0;i<ar.length;i++) {
 		if(ar[i] == "") {
 			ar[i]=0;
@@ -22,6 +22,7 @@ function calcSaved() {
 	}
 	
 	var txtSaved = document.getElementById('saved');
+	alert(ar[0]);
 	if(total > 0) {
 		txtSaved.innerHTML = "This Week You Saved: $" + Math.round(total * 100) / 100;
 	} else {
