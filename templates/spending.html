@@ -10,28 +10,26 @@
 	<section class="spending">
 		<h2 id="txtd"><b>Input this Weeks Values (date)</b></h2>
 		<form onsubmit="calcSaved(); return false;">
-			<label for="wage">Wage:</label> 
-			<input type="text" name="wage" id="wage" size="20" pattern="[0-9.]*" required="required"/>
-			</br>
-			<label for="allowance">Allowance:</label> 
-			<input type="text" name="allowance" id="allowance" pattern="[0-9.]*" size="20"/>
-			</br>
-			<label for="food">Food:</label> 
-			<input type="text" name="food" id="food" pattern="[0-9.]*" size="20"/>
-			</br>
-			<label for="phone">Phone Bill:</label> 
-			<input type="text" name="phone" id="phone" pattern="[0-9.]*" size="20"/>
-			</br>
-			<label for="utilities">Utilities:</label> 
-			<input type="text" name="utilities" id="utilities" pattern="[0-9.]*" size="20"/>
-			</br>
-			<label for="rent">Rent:</label> 
-			<input type="text" name="rent" id="rent" pattern="[0-9.]*" size="20"/>
-			</br>
-			<label for="internet">Internet:</label> 
-			<input type="text" name="internet" id="internet" pattern="[0-9.]*" size="20" />
-			</br>
-			<input type= "submit" value="Submit"/>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Planned Amount</th>
+					<th>Type</th>
+					<th>Actual Amount</th>
+				</tr>
+				{% for row in data_planned %}
+					<tr>
+						<td><lable for="{{ row.name }}">{{ row.name }}</lable></td>
+						<td><lable for="{{ row.name }}">{{ row.value }}</lable></td>
+						<td><lable for="{{ row.name }}">{{ row.type }}</lable></td>
+						<td><input type = "test" name = "{{ row.name }}" id = "{{ row.name }}" size="20" pattern="[0-9.]*" required="required" value="{{ row.value }}"></td>
+						<input type = "hidden" name = "{{ row.name }}_type" id = "{{ row.name }}_type" required="required" value="{{ row.type }}"></td>
+					</tr>
+				{% endfor %}
+				<tr>
+					<td><input type= "submit" value="Submit"/></td>
+				</tr>
+			</table>
 		</form>
 	</section>
 	

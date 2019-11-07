@@ -103,17 +103,6 @@ def hash_password(password,salt):
     hashed_password = hashGen.hexdigest()
     return hashed_password
 
-import sqlite3
-import hashlib
-from random import randint
-from base64 import b64encode
-from os import urandom
-from Application.send_email import *
-from Application.config import settings
-
-admin_email = settings['email']
-admin_password = settings['email_password']
-
 def add_planned_item(name, item_type, value, username):
     connection,cursor = connect_to_db()
     cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
@@ -131,6 +120,22 @@ def add_planned_item(name, item_type, value, username):
     connection.close()
 
     return "successful"
+
+def get_planned_table(username):
+    connection,cursor = connect_to_db()
+    cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
+    row = cursor.fetchone()
+
+    if not row:
+        return "user does not exist"
+
+    cursor.execute("SELECT * FROM planned_budget WHERE user_id=?", [row[0]])
+    rows = dictfetchall(cursor)
+    
+    connection.commit()
+    connection.close()
+
+    return rows
 
 def delete_row(row_num, username):
     connection,cursor = connect_to_db()
@@ -171,3 +176,11 @@ def get_rows(username):
     connection.close()
 
     return jstring
+
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]

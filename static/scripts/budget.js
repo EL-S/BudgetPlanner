@@ -91,7 +91,7 @@ function addRowsFromDatabase() {
         // pick the last and prepend
         rows[rows.length - 1].insertAdjacentHTML('beforebegin', "<td>" + bname + "</td><td>" + btype + "</td><td>$" + bvalue + "</td><td><form action='/del_item' method='post'>" + "<input type='hidden' name='csrfmiddlewaretoken' value='" + csrftoken + "'>" + "<input type='hidden' id='rowNum' name='rowNum' value='" + i + "'/><input type='submit' value='Delete'/></form></td>");
         }
-        }
+    }
 	
 	calcTotal();
 }
