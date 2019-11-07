@@ -2,23 +2,21 @@
 
 
 //Gets info from form and calculates if the user lost or saved money
-function calcSaved() {	
-	var ar = $('form').serialize().replace(/csrfmiddlewaretoken=[A-Za-z0-9]*&/g, "").replace("wage=", "").replace("&allowance=", ",").replace("&food=", ",").replace("&phone=", ",").replace("&utilities=", ",").replace("&rent=", ",").replace("&internet=", ",").split(",");
+function calcSaved() {
+	var ar = $('form').serialize().split("&");
 	
 	var total = 0;
-
-	for(var i = 0;i<ar.length;i++) {
-		if(ar[i] == "") {
-			ar[i]=0;
+	
+	for (var i = 0; i<ar.length; i++) {
+		var value = ar[i].split("=")[1];
+		// if is a number
+		if (Number(parseFloat(value)) == value) {
+			if (ar[i+1].split("=")[1] == "Spending") {
+				total -= parseFloat(value);
+			} else {
+				total += parseFloat(value);
+			}
 		}
-	}
-	
-	//Wage and Allowance
-	total += parseFloat(ar[0]);
-	total += parseFloat(ar[1]);
-	
-	for(var i = 2;i < ar.length;i++) {
-		total -= parseFloat(ar[i]);
 	}
 	
 	var txtSaved = document.getElementById('saved');
