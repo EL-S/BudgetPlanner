@@ -35,8 +35,8 @@ function weekDates() {
 	var txt = document.getElementById('txtd');
 	
 	var curr = new Date; // get current date
-	var first = curr.getDate() - curr.getDay(); // First day of week
-	var last = first + 7; // last day
+	var first = curr.getDate() - curr.getDay() + 1; // First day of week
+	var last = first + 6; // last day
 
 	var firstday = new Date(curr.setDate(first));
 	var lastday = new Date(curr.setDate(last));
