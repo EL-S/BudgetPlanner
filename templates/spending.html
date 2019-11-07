@@ -14,13 +14,16 @@
 				<tr>
 					<th>Name</th>
 					<th>Planned Amount</th>
+					<th>Type</th>
 					<th>Actual Amount</th>
 				</tr>
 				{% for row in data_planned %}
 					<tr>
 						<td><lable for="{{ row.name }}">{{ row.name }}</lable></td>
 						<td><lable for="{{ row.name }}">{{ row.value }}</lable></td>
+						<td><lable for="{{ row.name }}">{{ row.type }}</lable></td>
 						<td><input type = "test" name = "{{ row.name }}" id = "{{ row.name }}" size="20" pattern="[0-9.]*" required="required" value="{{ row.value }}"></td>
+						<input type = "hidden" name = "{{ row.name }}_type" id = "{{ row.name }}_type" required="required" value="{{ row.type }}"></td>
 					</tr>
 				{% endfor %}
 				<tr>
