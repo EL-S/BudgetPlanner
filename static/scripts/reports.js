@@ -6,18 +6,43 @@ var green = "rgba(0,200,0,0.5)";
 
 // Selects canvas for pie chart and draws it
 function drawPieChart() {
-    var ctx = document.getElementById('pieChart');
-    new Chart(ctx, {
-        "type":"pie",
-        "data":{
-            "labels":["Food", "Bills", "Entertainment"],
-            "datasets":[{
-                "label":"Spending ($)",
-                "data":[10, 20, 30],
-                "backgroundColor":["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"]
-            }]
+    if(db.toString() != "") {
+        var ar = db.toString().trim().replace(/,$/g,"").split(',');
+        var itemNames = [];
+        var itemValues = [];
+        var itemColours = [];
+
+        // Put user's budget item details into arrays
+        for(var i = 0; i < ar.length/5; i++) {
+            var bname = ar[i*5 + 1];
+            var btype = ar[i*5 + 2];
+            var bvalue = ar[i*5 + 3];
+            
+            itemNames.push(bname);
+            itemValues.push(bvalue);
+            
+            if (btype == "Income") {
+                itemColours.push(green);
+            } else {
+                itemColours.push(red);
+            }
         }
-    });
+
+
+
+        var ctx = document.getElementById('pieChart');
+        new Chart(ctx, {
+            "type":"pie",
+            "data":{
+                "labels":itemNames,
+                "datasets":[{
+                    "label":"Spending ($)",
+                    "data":itemValues,
+                    "backgroundColor":itemColours
+                }]
+            }
+        });
+    }
 }
 
 // Selects canvas for line chart and draws it
