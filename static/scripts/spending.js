@@ -22,7 +22,7 @@ function calcSaved() {
 	}
 	
 	var txtSaved = document.getElementById('saved');
-	alert(ar[0]);
+
 	if(total > 0) {
 		txtSaved.innerHTML = "This Week You Saved: $" + Math.round(total * 100) / 100;
 	} else {
