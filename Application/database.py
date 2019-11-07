@@ -103,17 +103,6 @@ def hash_password(password,salt):
     hashed_password = hashGen.hexdigest()
     return hashed_password
 
-import sqlite3
-import hashlib
-from random import randint
-from base64 import b64encode
-from os import urandom
-from Application.send_email import *
-from Application.config import settings
-
-admin_email = settings['email']
-admin_password = settings['email_password']
-
 def add_planned_item(name, item_type, value, username):
     connection,cursor = connect_to_db()
     cursor.execute("SELECT user_id FROM users WHERE username=?", [username])
