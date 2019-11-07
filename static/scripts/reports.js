@@ -28,8 +28,6 @@ function drawPieChart() {
             }
         }
 
-
-
         var ctx = document.getElementById('pieChart');
         new Chart(ctx, {
             "type":"pie",
