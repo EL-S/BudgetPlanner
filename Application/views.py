@@ -109,7 +109,7 @@ def spending(request):
 	
 def reports(request):
     if Application.database.check_login(request):
-        return render(request, 'reports.html', {'title': 'Reports', 'username': request.COOKIES.get('username')})
+        return render(request, 'reports.html', {'title': 'Reports', 'username': request.COOKIES.get('username'), 'data': Application.database.get_rows(request.COOKIES.get('username'))})
     else:
         return login_redirect(request, 'Please login to view this page')
 	
